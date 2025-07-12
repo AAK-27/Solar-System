@@ -1,5 +1,5 @@
 # Solar-System
-### A 3D visualization of the solar system built in JavaScript using Three.js with data from NASA's Horizon and Small Body Databases.
+### A 3D visualization of the solar system built in JavaScript using Three.js for 3D graphics. The position and size of bodies are based on data from NASA's Horizon database and Small Body Database. 
 The sizes and distances between planets are not to scale-- This is because the solar system is massive, and it would take hours to traverse if it was to scale
 
 ## Controls
