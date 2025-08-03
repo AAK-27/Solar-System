@@ -33,35 +33,10 @@ camera.position.z = 1000;
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
 scene.add( ambientLight );
 
-// const redLineMaterial = new THREE.LineBasicMaterial( { color: 0xff0000 } );
-// const greenLineMaterial = new THREE.LineBasicMaterial( { color: 0x00ff00 } );
-// const blueLineMaterial = new THREE.LineBasicMaterial( { color: 0x0000ff } );
-
-// const xAxisPoints = [];
-// xAxisPoints.push( new THREE.Vector3( 10, 0, 0 ) );
-// xAxisPoints.push( new THREE.Vector3( 0, 0, 0 ) );
-// const xAxisGeometry = new THREE.BufferGeometry().setFromPoints( xAxisPoints );
-// const xAxis = new THREE.Line( xAxisGeometry, redLineMaterial );
-// scene.add( xAxis );
-
-// const yAxisPoints = [];
-// yAxisPoints.push( new THREE.Vector3( 0, 10, 0 ) );
-// yAxisPoints.push( new THREE.Vector3( 0, 0, 0 ) );
-// const yAxisGeometry = new THREE.BufferGeometry().setFromPoints( yAxisPoints );
-// const yAxis = new THREE.Line( yAxisGeometry, greenLineMaterial );
-// scene.add( yAxis );
-
-// const zAxisPoints = [];
-// zAxisPoints.push( new THREE.Vector3( 0, 0, 10 ) );
-// zAxisPoints.push( new THREE.Vector3( 0, 0, 0 ) );
-// const zAxisGeometry = new THREE.BufferGeometry().setFromPoints( zAxisPoints );
-// const zAxis = new THREE.Line( zAxisGeometry, blueLineMaterial );
-// scene.add( zAxis );
-
 // Add the sun
 var diameter = 8000;
 const sunGeometry = new THREE.SphereGeometry( diameter * SIZESCALE );
-const sunTexture = new THREE.TextureLoader().load('/assets/8k_sun.jpg');
+const sunTexture = new THREE.TextureLoader().load('assets/8k_sun.jpg');
 sunTexture.colorSpace = THREE.SRGBColorSpace; // Ensure three.js uses the right colorspace so textures don't look washed-out
 const sunMaterial = new THREE.MeshBasicMaterial({ map: sunTexture });
 const sun = new THREE.Mesh( sunGeometry, sunMaterial );
@@ -72,7 +47,7 @@ scene.add( sun );
 diameter = 1000;
 var position = [0.1641797716569808, 0.2634520014233632, 0.006470952883686341];
 const mercuryGeometry = new THREE.SphereGeometry( diameter * SIZESCALE );
-const mercuryTexture = new THREE.TextureLoader().load('/assets/8k_mercury.jpg');
+const mercuryTexture = new THREE.TextureLoader().load('assets/8k_mercury.jpg');
 mercuryTexture.colorSpace = THREE.SRGBColorSpace; // Ensure three.js uses the right colorspace so textures don't look washed-out
 const mercuryMaterial = new THREE.MeshBasicMaterial({ map: mercuryTexture });
 const mercury = new THREE.Mesh( mercuryGeometry, mercuryMaterial );
@@ -83,29 +58,44 @@ scene.add( mercury );
 diameter = 3000;
 var position = [-0.6040652826661133, 0.3872022730654806, 0.040172416999277];
 const venusGeometry = new THREE.SphereGeometry( diameter * SIZESCALE );
-const venusTexture = new THREE.TextureLoader().load('/assets/8k_venus_surface.jpg');
+const venusTexture = new THREE.TextureLoader().load('assets/8k_venus_surface.jpg');
 venusTexture.colorSpace = THREE.SRGBColorSpace; // Ensure three.js uses the right colorspace so textures don't look washed-out
 const venusMaterial = new THREE.MeshBasicMaterial({ map: venusTexture });
 const venus = new THREE.Mesh( venusGeometry, venusMaterial );
 venus.position.set(position[0]*DISTANCESCALE, position[2]*DISTANCESCALE, position[1]*DISTANCESCALE);
 scene.add( venus );
+// Add Venus's atmosphere
+const venusAtmosphereGeometry = new THREE.SphereGeometry( (diameter+50) * SIZESCALE);
+const venusAtmosphereTexture = new THREE.TextureLoader().load('assets/4k_venus_atmosphere.jpg');
+venusAtmosphereTexture.colorSpace = THREE.SRGBColorSpace;
+const venusAtmosphereMaterial = new THREE.MeshBasicMaterial({ map: venusAtmosphereTexture, transparent: true, opacity: 0.5 });
+const venusAtmosphere = new THREE.Mesh(venusAtmosphereGeometry, venusAtmosphereMaterial);
+venusAtmosphere.position.set(position[0]*DISTANCESCALE, position[2]*DISTANCESCALE, position[1]*DISTANCESCALE);
+scene.add( venusAtmosphere );
 
 // Add Earth
 diameter = 3200;
 var position = [-0.9358538582543061, 0.3258369879724334, -1.33715970328223e-05];
 const earthGeometry = new THREE.SphereGeometry( diameter * SIZESCALE );
-const earthTexture = new THREE.TextureLoader().load('/assets/8k_earth_daymap.jpg');
+const earthTexture = new THREE.TextureLoader().load('assets/8k_earth_daymap.jpg');
 earthTexture.colorSpace = THREE.SRGBColorSpace; // Ensure three.js uses the right colorspace so textures don't look washed-out
 const earthMaterial = new THREE.MeshBasicMaterial({ map: earthTexture });
 const earth = new THREE.Mesh( earthGeometry, earthMaterial );
 earth.position.set(position[0]*DISTANCESCALE, position[2]*DISTANCESCALE, position[1]*DISTANCESCALE);
 scene.add( earth );
+// Add Earth's atmosphere
+const earthAtmosphereGeometry = new THREE.SphereGeometry( (diameter+50) * SIZESCALE);
+const earthAtmosphereTexture = new THREE.TextureLoader().load('assets/8k_earth_clouds.jpg');
+const earthAtmosphereMaterial = new THREE.MeshBasicMaterial({ transparent: true, alphaMap: earthAtmosphereTexture });
+const earthAtmosphere = new THREE.Mesh(earthAtmosphereGeometry, earthAtmosphereMaterial);
+earthAtmosphere.position.set(position[0]*DISTANCESCALE, position[2]*DISTANCESCALE, position[1]*DISTANCESCALE);
+scene.add( earthAtmosphere );
 
 // Add Mars
 diameter = 2000;
 var position = [-1.186340953248194, 1.153311470639685, 0.05326125215252044];
 const marsGeometry = new THREE.SphereGeometry( diameter * SIZESCALE );
-const marsTexture = new THREE.TextureLoader().load('/assets/8k_mars.jpg');
+const marsTexture = new THREE.TextureLoader().load('assets/8k_mars.jpg');
 marsTexture.colorSpace = THREE.SRGBColorSpace; // Ensure three.js uses the right colorspace so textures don't look washed-out
 const marsMaterial = new THREE.MeshBasicMaterial({ map: marsTexture });
 const mars = new THREE.Mesh( marsGeometry, marsMaterial );
@@ -116,7 +106,7 @@ scene.add( mars );
 diameter = 7000;
 var position = [0.6076042138714324, 5.066044525795209, -0.03463819961053206];
 const jupiterGeometry = new THREE.SphereGeometry( diameter * SIZESCALE );
-const jupiterTexture = new THREE.TextureLoader().load('/assets/8k_jupiter.jpg');
+const jupiterTexture = new THREE.TextureLoader().load('assets/8k_jupiter.jpg');
 jupiterTexture.colorSpace = THREE.SRGBColorSpace; // Ensure three.js uses the right colorspace so textures don't look washed-out
 const jupiterMaterial = new THREE.MeshBasicMaterial({ map: jupiterTexture });
 const jupiter = new THREE.Mesh( jupiterGeometry, jupiterMaterial );
@@ -128,7 +118,7 @@ diameter = 6500;
 var position = [9.497686525484314, -1.437850733044135, -0.3530243447550175];
 const saturnGeometry = new THREE.SphereGeometry( diameter * SIZESCALE );
 saturnGeometry.rotateX(Math.PI / 180 * 26.7);
-const saturnTexture = new THREE.TextureLoader().load('/assets/8k_saturn.jpg');
+const saturnTexture = new THREE.TextureLoader().load('assets/8k_saturn.jpg');
 saturnTexture.colorSpace = THREE.SRGBColorSpace; // Ensure three.js uses the right colorspace so textures don't look washed-out
 const saturnMaterial = new THREE.MeshBasicMaterial({ map: saturnTexture });
 const saturn = new THREE.Mesh( saturnGeometry, saturnMaterial );
@@ -138,7 +128,7 @@ scene.add( saturn );
 const saturnRingGeometry = new THREE.TorusGeometry( 10000 * SIZESCALE, 3000 * SIZESCALE, 8, 64);
 saturnRingGeometry.scale(1, 1, 0.01);
 saturnRingGeometry.rotateX(Math.PI / 180 * (26.7 + 90));
-const saturnRingTexture = new THREE.TextureLoader().load('/assets/8k_saturn_ring_alpha.png');
+const saturnRingTexture = new THREE.TextureLoader().load('assets/8k_saturn_ring_alpha.png');
 saturnRingTexture.rotation = Math.PI / 2;
 saturnRingTexture.wrapS = THREE.MirroredRepeatWrapping;
 saturnRingTexture.repeat.set(2, 1);
@@ -155,7 +145,7 @@ scene.add(saturnRing);
 diameter = 6000;
 var position = [10.90806190918147, 16.21551322237325, -0.08121429610559158];
 const uranusGeometry = new THREE.SphereGeometry( diameter * SIZESCALE );
-const uranusTexture = new THREE.TextureLoader().load('/assets/2k_uranus.jpg');
+const uranusTexture = new THREE.TextureLoader().load('assets/2k_uranus.jpg');
 uranusTexture.colorSpace = THREE.SRGBColorSpace; // Ensure three.js uses the right colorspace so textures don't look washed-out
 const uranusMaterial = new THREE.MeshBasicMaterial({ map: uranusTexture });
 const uranus = new THREE.Mesh( uranusGeometry, uranusMaterial );
@@ -166,7 +156,7 @@ scene.add( uranus );
 diameter = 5500;
 var position = [29.88167225596445, -0.4461375316323678, -0.6794114826854919];
 const neptuneGeometry = new THREE.SphereGeometry( diameter * SIZESCALE );
-const neptuneTexture = new THREE.TextureLoader().load('/assets/2k_neptune.jpg');
+const neptuneTexture = new THREE.TextureLoader().load('assets/2k_neptune.jpg');
 neptuneTexture.colorSpace = THREE.SRGBColorSpace; // Ensure three.js uses the right colorspace so textures don't look washed-out
 const neptuneMaterial = new THREE.MeshBasicMaterial({ map: neptuneTexture });
 const neptune = new THREE.Mesh( neptuneGeometry, neptuneMaterial );
@@ -176,24 +166,8 @@ scene.add( neptune );
 fetch('all_bodies.json')
     .then(response => response.json())
     .then(data => {
-        const planets = ['199', '299', '399', '499', '599', '699', '799', '899'];
         for (let keys in data){
-            if (planets.includes(keys)){
-                const diameter = data[keys].diameter;
-                const position = data[keys].position;
-                const bodyGeometry = new THREE.SphereGeometry( diameter * SIZESCALE );
-                const color = data[keys].color;
-                const threeColor = new THREE.Color();
-                threeColor.setRGB(color[0], color[1], color[2])
-                const material = new THREE.MeshStandardMaterial({ color: threeColor });
-                const body = new THREE.Mesh( bodyGeometry, material );
-                body.position.set(position[0]*DISTANCESCALE, position[2]*DISTANCESCALE, position[1]*DISTANCESCALE);
-                scene.add( body );
-                continue;
-            }
-            // console.log(data[keys].position);
             const diameter = data[keys].diameter;
-            // const color = data[keys]["color"];
             const position = data[keys].position;
             const bodyGeometry = new THREE.SphereGeometry( diameter * SIZESCALE );
             const material = new THREE.MeshStandardMaterial();
