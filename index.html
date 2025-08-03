@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Horizons!</title>
+		<style>
+			body {
+        margin: 0;
+        color: aliceblue;
+      }
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+		</style>
+        <script type="importmap">
+            {
+              "imports": {
+                "three": "https://cdn.jsdelivr.net/npm/three@v0.165/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.165/examples/jsm/"
+              }
+            }
+          </script>
+	</head>
+	<body>
+    <canvas></canvas>
+    <script src="solar-system.js" type="module"></script>
+	</body>
+</html>
